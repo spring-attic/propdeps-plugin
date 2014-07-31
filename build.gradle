@@ -1,68 +1,20 @@
-buildscript {
-    repositories {
-        maven { url 'https://repo.spring.io/plugins-release' }
-    }
-    dependencies {
-        classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:2.2.2'
-    }
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'maven'
+
+
+repositories {
+    mavenCentral()
 }
 
-allprojects {
-    apply plugin: 'idea'
-    apply plugin: 'eclipse'
-}
+group = 'io.spring.gradle'
 
-subprojects {
-    apply plugin: 'groovy'
-    apply plugin: 'maven'
-    apply plugin: 'artifactory'
-
-    group = 'org.springframework.build.gradle'
-
-    repositories {
-        maven { url 'https://repo.spring.io/libs-release' }
-    }
-
-    dependencies {
-        compile gradleApi()
-        compile localGroovy()
-    }
-}
-
-ext.repoUser = project.properties['REPO_USERNAME']
-ext.repoPass = project.properties['REPO_PASSWORD']
-
-gradle.taskGraph.whenReady {taskGraph ->
-    if (taskGraph.hasTask(':docbook-reference-plugin:artifactoryPublish') &&
-            (repoUser == null || repoPass == null)) {
-        logger.warn("WARNING: artifactoryPublish task specified but REPO_USERNAME " +
-            "and REPO_PASSWORD properties have not been provided. Authorization may fail.")
-    }
-}
-
-artifactory {
-    contextUrl = 'https://repo.spring.io'
-    publish {
-        repository {
-            repoKey = 'plugins-snapshot-local'
-            username = repoUser
-            password = repoPass
-        }
-        defaults {
-            publishConfigs('archives')
-        }
-    }
-    resolve {
-        repository {
-            repoKey = 'libs-releases'
-            username = repoUser
-            password = repoPass
-            maven = true
-        }
-    }
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
 }
 
 task wrapper(type: Wrapper) {
-    description = 'Generates gradlew[.bat] scripts'
     gradleVersion = '1.11'
 }

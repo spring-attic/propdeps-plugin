@@ -1,6 +1,4 @@
 .gradle
-build
-!*/src/*/*/org/springframework/build
 *.sw?
 .classpath
 .project
@@ -10,3 +8,4 @@ bin
 *.ipr
 *.iws
 .idea
+/build
