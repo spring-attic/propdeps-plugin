@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.springframework.build.gradle.propdep
+package io.spring.gradle.propdeps
 
 import org.gradle.api.*
 import org.gradle.api.artifacts.maven.Conf2ScopeMappingContainer
