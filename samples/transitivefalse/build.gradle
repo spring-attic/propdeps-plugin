@@ -4,7 +4,7 @@ buildscript {
 		mavenLocal()
 	}
 	dependencies {
-		classpath("org.springframework.build.gradle:propdeps-plugin:0.0.6-SNAPSHOT")
+		classpath("io.spring.gradle:propdeps-plugin:0.0.8-SNAPSHOT")
 	}
 }
 

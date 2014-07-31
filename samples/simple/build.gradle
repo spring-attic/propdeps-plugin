@@ -1,0 +1,29 @@
+buildscript {
+	repositories {
+		maven { url "http://repo.spring.io/plugins-release" }
+		mavenLocal()
+	}
+	dependencies { classpath 'io.spring.gradle:propdeps-plugin:0.0.8-SNAPSHOT' }
+}
+
+repositories {
+	mavenCentral()
+}
+
+apply plugin: 'java'
+
+configure( allprojects ) {
+	apply plugin: 'propdeps'
+	apply plugin: 'propdeps-maven'
+	apply plugin: 'propdeps-idea'
+	apply plugin: 'propdeps-eclipse'
+}
+
+dependencies{
+	provided  group: 'com.google.guava', name: 'guava', version: '17.0'
+}
+jar {
+	doFirst {
+		into( 'lib' ) { from configurations.compile }
+	}
+}
