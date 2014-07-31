@@ -23,6 +23,7 @@ import org.gradle.api.artifacts.maven.PomFilterContainer
 import org.gradle.api.plugins.MavenPlugin
 import org.gradle.api.tasks.*
 
+
 /**
  * Plugin to allow optional and provided dependency configurations to work with the
  * standard gradle 'maven' plugin
@@ -59,4 +60,5 @@ class PropDepsMavenPlugin implements Plugin<Project> {
 			}
 		}
 	}
+
 }

@@ -19,6 +19,7 @@ package io.spring.gradle.propdeps
 import org.gradle.api.*
 import org.gradle.plugins.ide.idea.IdeaPlugin
 
+
 /**
  * Plugin to allow optional and provided dependency configurations to work with the
  * standard gradle 'idea' plugin
@@ -40,4 +41,5 @@ class PropDepsIdeaPlugin implements Plugin<Project> {
 			scopes.PROVIDED.plus += [project.configurations.optional]
 		}
 	}
+
 }

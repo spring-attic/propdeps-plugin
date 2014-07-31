@@ -22,6 +22,7 @@ import org.gradle.api.artifacts.ConfigurationContainer
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.tasks.javadoc.Javadoc
 
+
 /**
  * Plugin to allow 'optional' and 'provided' dependency configurations
  *
