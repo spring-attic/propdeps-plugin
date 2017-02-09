@@ -1,16 +1,21 @@
+plugins {
+	id "com.jfrog.artifactory" version "4.4.0"
+}
+
 apply plugin: 'groovy'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'maven'
+apply from: "$rootDir/gradle/artifactory.gradle"
 
 
 repositories {
-    mavenCentral()
+	mavenCentral()
 }
 
 group = 'io.spring.gradle'
 
 dependencies {
-    compile gradleApi()
-    compile localGroovy()
+	compile gradleApi()
+	compile localGroovy()
 }
