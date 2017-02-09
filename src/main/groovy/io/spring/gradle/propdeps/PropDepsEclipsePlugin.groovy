@@ -33,13 +33,9 @@ class PropDepsEclipsePlugin implements Plugin<Project> {
 		project.plugins.apply(PropDepsPlugin)
 		project.plugins.apply(EclipsePlugin)
 
-		// Ensure only the compile configuration is exported
-		project.eclipse.classpath.file {
-			whenMerged { classpath ->
-				def resolved = project.configurations.compile.resolve()
-				classpath.entries.findAll{it.kind == 'lib'}.each {
-					it.exported = resolved.contains(project.file(it.path))
-				}
+		project.eclipse {
+			classpath {
+				plusConfigurations += [project.configurations.provided, project.configurations.optional]
 			}
 		}
 	}

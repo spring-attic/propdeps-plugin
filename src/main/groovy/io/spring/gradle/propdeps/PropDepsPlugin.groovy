@@ -38,6 +38,7 @@ import org.gradle.api.tasks.javadoc.Javadoc
  *
  * @author Phillip Webb
  * @author Brian Clozel
+ * @author Rob Winch
  *
  * @see <a href="http://www.gradle.org/docs/current/userguide/java_plugin.html#N121CF">Maven documentation</a>
  * @see <a href="https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Dependency_Scope">Gradle configurations</a>
@@ -50,23 +51,20 @@ class PropDepsPlugin implements Plugin<Project> {
 	public void apply(Project project) {
 		project.plugins.apply(JavaPlugin)
 
-		Configuration provided = addConfiguration(project.configurations, "provided")
-		Configuration optional = addConfiguration(project.configurations, "optional")
+		Configuration provided = addConfiguration(project, "provided")
+		Configuration optional = addConfiguration(project, "optional")
 
 		Javadoc javadoc = project.tasks.getByName(JavaPlugin.JAVADOC_TASK_NAME)
 		javadoc.classpath = javadoc.classpath.plus(provided).plus(optional)
 	}
 
-	private Configuration addConfiguration(ConfigurationContainer configurations, String name) {
-		Configuration compile = configurations.getByName(JavaPlugin.COMPILE_CONFIGURATION_NAME)
-		Configuration configuration = configurations.create(name)
+	private Configuration addConfiguration(Project project, String name) {
+		Configuration compile = project.configurations.getByName(JavaPlugin.COMPILE_CONFIGURATION_NAME)
+		Configuration configuration = project.configurations.create(name)
 
-		compile.extendsFrom(configuration)
-		configuration.visible = false
-		configuration.transitive = false
-
-		configuration.allDependencies.all {
-			dep -> configurations.default.exclude(group: dep.group, module: dep.name)
+		project.sourceSets.all {
+			compileClasspath += configuration
+			runtimeClasspath += configuration
 		}
 
 		return configuration
