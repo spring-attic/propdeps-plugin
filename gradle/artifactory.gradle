@@ -17,7 +17,7 @@ artifactoryPublish {
 	publishConfigs 'archives'
 	publishIvy false
 	properties = [
-		'bintray.package': "${project.group}:dependency-management",
+		'bintray.package': "${project.group}:propdeps-plugin",
 		'bintray.version': "${project.version}"
 	]
 }
