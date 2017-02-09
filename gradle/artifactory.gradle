@@ -1,8 +1,10 @@
+def isSnapshot = version?.endsWith("-SNAPSHOT")
+
 artifactory {
 	contextUrl = 'https://repo.spring.io'
 	publish {
 		repository {
-			repoKey = 'plugins-snapshot-local'
+			repoKey = isSnapshot ? 'plugins-snapshot-local' : 'plugins-local'
 			if(project.hasProperty('artifactoryUsername')) {
 				username = artifactoryUsername
 				password = artifactoryPassword
