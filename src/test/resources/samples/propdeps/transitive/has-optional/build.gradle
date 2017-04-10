@@ -1,0 +1,12 @@
+plugins {
+	id 'propdeps'
+	id 'java'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	optional 'ch.qos.logback:logback-classic:1.1.10'
+}

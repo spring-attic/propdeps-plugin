@@ -1,0 +1,20 @@
+apply plugin: 'war'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile project(':has-optional')
+}
+
+task verifyWar(dependsOn: 'assemble') {
+	doLast {
+		zipTree(war.archivePath).each { 
+			if(it.name == "logback-classic.jar") {
+				throw new RuntimeException("Failed!" + it);
+			}
+		}
+	}
+}
+check.dependsOn verifyWar
