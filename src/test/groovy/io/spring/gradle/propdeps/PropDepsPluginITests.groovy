@@ -27,4 +27,22 @@ class PropDepsPluginITests extends Specification {
 		names.contains('WEB-INF/lib/has-optional.jar')
 		!names.contains('WEB-INF/lib/logback-classic-1.1.10.jar')
 	}
+
+	def "install"() {
+		when:
+		BuildResult result = testKit.withProjectResource("samples/propdeps/maven/")
+				.withArguments('install')
+				.build();
+		then: 'optional is included in the pom'
+		File pom = new File(testKit.getRootDir(), 'build/poms/pom-default.xml')
+		pom.exists()
+		String pomText = pom.getText()
+		pomText.replaceAll('\\s','').contains(''' <dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.1.10</version>
+			<scope>compile</scope>
+			<optional>true</optional>
+		</dependency>'''.replaceAll('\\s',''))
+	}
 }
