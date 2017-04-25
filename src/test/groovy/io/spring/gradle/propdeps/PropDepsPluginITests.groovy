@@ -30,9 +30,30 @@ class PropDepsPluginITests extends Specification {
 
 	def "install"() {
 		when:
-		BuildResult result = testKit.withProjectResource("samples/propdeps/maven/")
-				.withArguments('install')
+		BuildResult result = testKit.withProjectResource("samples/propdeps/maven/install")
+				.withArguments('install', '--stacktrace')
+				.forwardOutput()
 				.build();
+		then: 'optional is included in the pom'
+		File pom = new File(testKit.getRootDir(), 'build/poms/pom-default.xml')
+		pom.exists()
+		String pomText = pom.getText()
+		pomText.replaceAll('\\s','').contains(''' <dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.1.10</version>
+			<scope>compile</scope>
+			<optional>true</optional>
+		</dependency>'''.replaceAll('\\s',''))
+	}
+
+	def "upload"() {
+		when:
+		BuildResult result = testKit.withProjectResource("samples/propdeps/maven/upload")
+				.withArguments('uploadArchives', '--stacktrace')
+				.forwardOutput()
+				.build();
+		new File(testKit.getRootDir(), 'build').listFiles().each { println it }
 		then: 'optional is included in the pom'
 		File pom = new File(testKit.getRootDir(), 'build/poms/pom-default.xml')
 		pom.exists()

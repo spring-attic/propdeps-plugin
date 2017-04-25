@@ -45,7 +45,9 @@ class PropDepsMavenPlugin implements Plugin<Project> {
 			project.configurations.getByName("optional"), "optional")
 
 		// Add a hook to replace the optional scope
-		project.tasks.withType(Upload).each{ applyToUploadTask(project, it) }
+		project.afterEvaluate {
+			project.tasks.withType(Upload).each { applyToUploadTask(project, it) }
+		}
 	}
 
 	private void applyToUploadTask(Project project, Upload upload) {
@@ -53,7 +55,7 @@ class PropDepsMavenPlugin implements Plugin<Project> {
 	}
 
 	private void applyToPom(Project project, PomFilterContainer pomContainer) {
-		pomContainer.pom.whenConfigured{ MavenPom pom ->
+		pomContainer.pom.whenConfigured { MavenPom pom ->
 			pom.dependencies.findAll{ it.scope == "optional" }.each {
 				it.scope = "compile"
 				it.optional = true

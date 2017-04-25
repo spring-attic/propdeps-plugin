@@ -1,0 +1,25 @@
+plugins {
+	id 'java'
+	id 'propdeps'
+}
+
+apply plugin: 'propdeps-maven'
+
+group = 'sample'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	optional 'ch.qos.logback:logback-classic:1.1.10'
+}
+
+uploadArchives {
+	repositories {
+		mavenDeployer {
+			repository(url: "file:$buildDir/repo")
+		}
+	}
+}
+

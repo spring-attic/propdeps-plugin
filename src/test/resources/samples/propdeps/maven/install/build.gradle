@@ -1,9 +1,10 @@
 plugins {
 	id 'java'
-	id 'maven'
 	id 'propdeps'
-	id 'propdeps-maven'
 }
+
+apply plugin: 'propdeps-maven'
+
 
 repositories {
 	mavenCentral()
@@ -12,3 +13,4 @@ repositories {
 dependencies {
 	optional 'ch.qos.logback:logback-classic:1.1.10'
 }
+
