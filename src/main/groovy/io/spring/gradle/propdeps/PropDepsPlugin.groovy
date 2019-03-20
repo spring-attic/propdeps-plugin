@@ -40,7 +40,7 @@ import org.gradle.api.tasks.javadoc.Javadoc
  * @author Brian Clozel
  * @author Rob Winch
  *
- * @see <a href="http://www.gradle.org/docs/current/userguide/java_plugin.html#N121CF">Maven documentation</a>
+ * @see <a href="https://www.gradle.org/docs/current/userguide/java_plugin.html#N121CF">Maven documentation</a>
  * @see <a href="https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Dependency_Scope">Gradle configurations</a>
  * @see PropDepsEclipsePlugin
  * @see PropDepsIdeaPlugin
