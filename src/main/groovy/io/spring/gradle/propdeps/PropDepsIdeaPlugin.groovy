@@ -26,8 +26,8 @@ import org.gradle.plugins.ide.idea.IdeaPlugin
  *
  * @author Phillip Webb
  * @author Brian Clozel
- * @link http://youtrack.jetbrains.com/issue/IDEA-107046
- * @link http://youtrack.jetbrains.com/issue/IDEA-117668
+ * @link https://youtrack.jetbrains.com/issue/IDEA-107046
+ * @link https://youtrack.jetbrains.com/issue/IDEA-117668
  */
 class PropDepsIdeaPlugin implements Plugin<Project> {
 
