@@ -8,7 +8,7 @@ apply plugin: 'propdeps-maven'
 group = 'sample'
 
 repositories {
-	mavenCentral()
+	maven { url 'https://repo.maven.apache.org/maven2/' }
 }
 
 dependencies {
