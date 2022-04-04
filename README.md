@@ -1,3 +1,5 @@
+# propdeps-plugin is no longer actively maintained by VMware, Inc.
+
 ## Overview
 Provides additional `optional` and `provided` dependency configurations for Gradle
 along with Maven POM generation support.
